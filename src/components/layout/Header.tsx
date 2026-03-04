@@ -1,6 +1,5 @@
 import Link from "next/link";
-import Image from "next/image"; // simepre llama cuando vas a cargar imagenes estatucas
-
+import Image from "next/image"; // simepre llamar cuando vas a cargar imagenes estaticas
 export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur border-b border-white/10">

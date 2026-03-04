@@ -33,6 +33,17 @@ export default function ServicesSection() {
           Lo que hacemos
         </h2>
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
+          <div className="icons-grid">
+            <div className="icon-card">
+              <div className="icon-wrapper">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  <circle cx="12" cy="12" r="3" strokeWidth="1"/>
+                </svg>
+              </div>
+              <div className="icon-label">Branding</div>
+            </div>
+          </div>
           {services.map((service, i) => {
             const Icon = service.icon;
             return (

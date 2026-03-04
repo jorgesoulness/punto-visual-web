@@ -1,14 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
 export default function Preloader() {
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(true);
-
   useEffect(() => {
     let count = 0;
-
     const interval = setInterval(() => {
       count += Math.floor(Math.random() * 8) + 3; // velocidad variable
       if (count >= 100) {
@@ -18,10 +15,8 @@ export default function Preloader() {
       }
       setProgress(count);
     }, 40);
-
     return () => clearInterval(interval);
   }, []);
-
   return (
     <AnimatePresence>
       {visible && (

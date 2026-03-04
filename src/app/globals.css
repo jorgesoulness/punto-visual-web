@@ -61,6 +61,7 @@ h1, h2, h3, h4, h5, h6 {
 .swiper-slide:not(.swiper-slide-active) {
   filter: brightness(0.8);
 }
+/* Cards servicios */
 .pv-card-border {
   background: linear-gradient(
     120deg,
@@ -73,8 +74,109 @@ h1, h2, h3, h4, h5, h6 {
   background-size: 200% 200%;
   animation: pvBorderMove 6s linear infinite;
 }
-
 @keyframes pvBorderMove {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
+}
+
+.icons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  width: 100%;
+}
+.icon-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(207, 222, 0, 0.1);
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.icon-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, var(--pv-primary-900) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.icon-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--pv-primary-500);
+  box-shadow: 0 20px 40px rgba(207, 222, 0, 0.1);
+}
+.icon-card:hover::before {
+  opacity: 0.3;
+}
+.icon-wrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  position: relative;
+  z-index: 1;
+}
+.icon-wrapper svg {
+  width: 100%;
+  height: 100%;
+  stroke: var(--pv-primary);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: all 0.3s ease;
+}
+.icon-card:hover .icon-wrapper svg {
+  stroke: var(--pv-primary-light);
+  filter: drop-shadow(0 0 10px var(--pv-primary-500));
+  transform: scale(1.1);
+}
+.icon-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--pv-text);
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+.icon-card:hover .icon-label {
+  color: var(--pv-primary);
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.icon-card:hover .gear {
+  animation: rotate 4s linear infinite;
+  transform-origin: center;
+}
+.icon-card:hover .chart-line {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: draw 1s ease forwards;
+}
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+@media (max-width: 768px) {
+  .icons-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
 }
