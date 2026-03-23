@@ -34,12 +34,19 @@
   font-style: normal;
   font-display: swap;
 }
-
+html {
+  scroll-behavior: auto;
+}
 body {
   background: var(--background); color: var(--foreground); font-family: var(--font-body);
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading); letter-spacing: 0.02em;
+}
+
+/* Hero altura */
+.heroMain {
+  height: 100vh;
 }
 
 /* Swipper container */
@@ -179,4 +186,20 @@ h1, h2, h3, h4, h5, h6 {
   h1 {
     font-size: 1.8rem;
   }
+}
+#pv-logo path,
+#pv-logo polygon{
+  stroke: var(--pv-primary);
+  stroke-width: 2;
+}
+#pv-logo{
+  filter: drop-shadow(0 0 10px rgba(207,222,0,.6));
+}
+.tech-grid{
+  width:100%;
+  height:100%;
+  background-image:
+    linear-gradient(rgba(207,222,0,.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(207,222,0,.1) 1px, transparent 1px);
+  background-size:40px 40px;
 }
