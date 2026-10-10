@@ -19,7 +19,8 @@ export default function PortafolioGrid() {
   return (
     <section className="border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-24">
-        <h1 className="text-4xl font-bold mb-12">Portafolio</h1>
+        <h1 className="text-4xl font-bold mb-5">Portafolio de diseño y desarrollo web</h1>
+        <p className="mb-12 max-w-2xl text-base leading-relaxed text-foreground/70">Explora nuestras interfaces y proyectos digitales. En cada proyecto puedes conocer el enfoque del diseño y los servicios aplicados.</p>
         <div className="grid gap-10 md:grid-cols-2">
           {projects.map((project, i) => (
             <motion.div
@@ -37,7 +38,7 @@ export default function PortafolioGrid() {
                 <div className="relative aspect-video">
                   <Image
                     src={project.image}
-                    alt={project.title}
+                    alt={`Vista del diseño web de ${project.title}`}
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"

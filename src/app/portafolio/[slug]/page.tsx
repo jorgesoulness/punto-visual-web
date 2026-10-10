@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { projects } from "@/data/projects";
 import { notFound } from "next/navigation";
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 type Props = {
   params: Promise<{
     slug: string;
@@ -18,21 +19,12 @@ export async function generateMetadata(
   const { slug } = await params;
   const project = projects.find(p => p.slug === slug);
   if (!project) return {};
-  return {
+  return createPageMetadata({
     title: project.title,
     description: project.description,
-    openGraph: {
-      title: project.title,
-      description: project.description,
-      images: [
-        {
-          url: project.image,
-          width: 1200,
-          height: 630,
-        },
-      ],
-    },
-  };
+    path: `/portafolio/${project.slug}`,
+    image: project.image,
+  });
 }
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
@@ -53,7 +45,7 @@ export default async function ProjectPage({ params }: Props) {
       <section className="max-w-6xl mx-auto px-6 mb-24">
         <Image
           src={project.image}
-          alt={project.title}
+          alt={`Vista del diseño web de ${project.title}`}
           width={1200}
           height={700}
           className="rounded-2xl border border-white/10"
@@ -77,9 +69,9 @@ export default async function ProjectPage({ params }: Props) {
       </section>
       <section className="border-t border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-24 text-center space-y-6">
-          <h3 className="text-4xl font-bold">
+          <h2 className="text-4xl font-bold">
             ¿Quieres un proyecto así?
-          </h3>
+          </h2>
           <p className="text-foreground/80">
             Diseñamos experiencias digitales enfocadas en resultados.
           </p>

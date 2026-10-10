@@ -1,3 +1,10 @@
+// Dominio provisional: actualizar aquí cuando se confirme el dominio de producción.
+export const siteConfig = {
+  name: "Punto Visual",
+  url: "https://punto-visual.mx",
+  description: "Marketing digital, diseño y desarrollo web para negocios en Tijuana y Baja California, con atención a proyectos en San Diego y el sur de California.",
+  serviceAreas: ["Tijuana", "Baja California", "San Diego", "Sur de California"],
+};
 // Edita estos datos para ampliar el menú y cambiar el mensaje de la portada.
 export const navigation = [
   { label: "Servicios", href: "/#servicios" },
@@ -12,14 +19,14 @@ export const socialLinks = [
   { label: "Facebook", platform: "facebook", href: "" },
 ];
 export const heroContent = {
-  eyebrow: "ESTRATEGIA HUMANA. POTENCIAL DIGITAL.",
-  title: "Tu próxima etapa",
-  highlight: "empieza aquí.",
-  description: "Diseño y desarrollo web que convierte. Conectamos creatividad, marketing e inteligencia artificial para impulsar marcas y hacer crecer negocios reales.",
-  capabilities: ["Branding", "Growth marketing", "Web & conversión", "IA & automatización"],
+  eyebrow: "CREATIVIDAD, GROWTH E INTELIGENCIA ARTIFICIAL",
+  title: "Marketing digital.",
+  highlight: "Desarrollo web.",
+  description: "Impulsamos tu negocio con estrategia, diseño web e inteligencia artificial. Trabajamos con marcas en Tijuana y Baja California, y atendemos proyectos en San Diego y el sur de California.",
+  capabilities: ["Diseño y desarrollo web", "Growth marketing", "Branding", "IA y automatización"],
 };
 export const growthSteps = [
-  { number: "01", title: "Entendemos tu negocio", description: "Conectamos tus objetivos con las necesidades de tu audiencia para encontrar oportunidades de crecimiento." },
-  { number: "02", title: "Diseñamos el sistema", description: "Unimos marca, contenido, campañas y web en una experiencia coherente, con IA donde aporte valor." },
-  { number: "03", title: "Medimos y evolucionamos", description: "Convertimos datos en decisiones para probar, aprender y mejorar cada punto de contacto." },
+  { number: "01", title: "Entendemos tu negocio", description: "Revisamos tus objetivos, tu audiencia y tu presencia digital. Definimos las prioridades del proyecto y los indicadores que ayudarán a evaluar su avance." },
+  { number: "02", title: "Diseñamos el sistema", description: "Definimos el alcance y los entregables: sitio web, identidad de marca, contenido o campañas. Integramos automatización e IA cuando ayudan a resolver una necesidad concreta." },
+  { number: "03", title: "Medimos y evolucionamos", description: "Revisamos el desempeño del sitio y las campañas según el alcance acordado. Usamos los datos para ajustar mensajes, experiencia de usuario y oportunidades de conversión." },
 ];

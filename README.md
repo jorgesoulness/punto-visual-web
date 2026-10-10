@@ -52,8 +52,18 @@ El menú móvil admite teclado y cierre con Escape. El carrusel tiene control de
 
 El preloader global comparte el diseño orbital de la portada. Al abrir cualquier ruta espera la carga del documento y las fuentes, con un límite de 3,5 segundos desde el montaje. No simula porcentajes ni impone una espera mínima. `src/app/loading.tsx` muestra el mismo diseño mientras Next.js prepara una ruta; las páginas ya precargadas y el scroll entre secciones pueden abrirse directamente. Se oculta con JavaScript desactivado y respeta movimiento reducido. El formulario mantiene su indicador de envío independiente.
 
+## SEO y mercado objetivo
+
+El dominio provisional y las zonas de atención se configuran en siteConfig, en src/data/site.ts. Cambia siteConfig.url al confirmar el dominio: se utiliza para las URLs canónicas, Open Graph, datos estructurados, robots y sitemap. El correo de contacto se configura por separado.
+
+La portada prioriza marketing digital y desarrollo web para Tijuana y Baja California, con atención a proyectos en San Diego y el sur de California. Las páginas actuales están en español; no se declara una versión en inglés ni sedes físicas en Estados Unidos.
+
+src/lib/seo.ts genera metadatos propios por ruta. La portada incluye JSON-LD de Organization y WebSite con los datos disponibles; los perfiles sociales se incorporan cuando se agregan sus URLs reales. El sitemap omite lastModified hasta contar con fechas reales de edición.
+
+Antes de publicar, confirma dominio, zonas de atención y datos de contacto. Después de publicar, valida el JSON-LD con la prueba de resultados enriquecidos de Google y registra el sitio y su sitemap en Search Console. La siguiente etapa puede incorporar páginas completas de servicios y una versión en inglés para San Diego.
+
 ## Publicación
 
 La configuración actual requiere un servidor compatible con Next.js para optimizar imágenes. Si se necesita exportación estática, adapta `next.config.ts` y la estrategia de imágenes al alojamiento elegido.
 
-Actualiza el dominio en `src/app/layout.tsx`, `src/app/robots.ts` y `src/app/sitemap.ts` antes de publicar en otro dominio.
+Actualiza siteConfig.url en src/data/site.ts antes de publicar en otro dominio.

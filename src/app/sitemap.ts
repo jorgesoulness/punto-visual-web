@@ -1,18 +1,9 @@
 import type { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
+import { siteConfig } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://punto-visual.mx";
-
-  const projectUrls = projects.map((project) => ({
-    url: `${baseUrl}/portafolio/${project.slug}`,
-    lastModified: new Date(),
-  }));
-
-  return [
-    { url: baseUrl, lastModified: new Date() },
-    { url: `${baseUrl}/portafolio`, lastModified: new Date() },
-    { url: `${baseUrl}/contacto`, lastModified: new Date() },
-    ...projectUrls,
-  ];
+  // Añadir lastModified solo cuando se disponga de fechas reales de edición.
+  const paths = ["/", "/portafolio", "/contacto", ...projects.map((project) => `/portafolio/${project.slug}`)];
+  return paths.map((path) => ({ url: new URL(path, siteConfig.url).href }));
 }

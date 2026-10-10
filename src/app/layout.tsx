@@ -6,18 +6,19 @@ import Footer from "@/components/layout/Footer";
 import MotionProvider from "@/components/motion/MotionProvider";
 import SectionScroll from "@/components/navigation/SectionScroll";
 import Preloader from "@/components/Preloader";
+import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title: {
     default: "Punto Visual — Agencia de Marketing Digital",
     template: "%s | Punto Visual",
   },
-  description: "Creatividad, growth marketing, desarrollo web e inteligencia artificial para impulsar marcas y negocios.",
-  metadataBase: new URL("https://punto-visual.mx"),
+  description: siteConfig.description,
+  metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: "website",
     locale: "es_MX",
-    url: "https://punto-visual.mx",
+    url: siteConfig.url,
     siteName: "Punto Visual",
     images: [
       {
