@@ -39,11 +39,12 @@ export default function PortafolioGrid() {
                     src={project.image}
                     alt={project.title}
                     fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-0 p-6 space-y-2 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 p-6 space-y-2 transition-transform duration-300 group-hover:-translate-y-1 group-focus-visible:-translate-y-1">
                   <h2 className="text-2xl font-semibold">
                     {project.title}
                   </h2>

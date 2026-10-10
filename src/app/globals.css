@@ -1,5 +1,7 @@
 @import "tailwindcss";
 :root {
+  --header-height: 5rem;
+  --section-scroll-gap: 1rem;
   --pv-bg: #262729;
   --pv-text: #CAC8C8;
   --pv-primary: #CFDE00;
@@ -10,15 +12,14 @@
   --background: var(--pv-bg);
   --foreground: var(--pv-text);
   --font-heading: "Coolvetica", sans-serif;
-  --font-body: var(--font-body);
-  --swiper-theme-color: theme(colors.primary);
+  --swiper-theme-color: var(--pv-primary);
 }
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--pv-primary);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-mono: ui-monospace, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -35,8 +36,11 @@
   font-display: swap;
 }
 html {
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + var(--section-scroll-gap));
 }
+section[id] { scroll-margin-top: 0; }
+:focus-visible { outline: 2px solid var(--pv-primary); outline-offset: 5px; }
 body {
   background: var(--background); color: var(--foreground); font-family: var(--font-body);
 }
@@ -100,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 40px 30px;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
+  cursor: default;
   position: relative;
   overflow: hidden;
 }
@@ -183,9 +187,7 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  h1 {
-    font-size: 1.8rem;
-  }
+  .icon-card { padding: 28px 16px; }
 }
 #pv-logo path,
 #pv-logo polygon{
@@ -203,3 +205,73 @@ h1, h2, h3, h4, h5, h6 {
     linear-gradient(90deg, rgba(207,222,0,.1) 1px, transparent 1px);
   background-size:40px 40px;
 }
+
+
+/* Carga global: identidad orbital, sin porcentajes simulados. */
+.pv-orbit-logo { width: 60%; max-width: 120px; margin-block: 14px; }
+.pv-loader { display: grid; min-height: 100%; place-items: center; padding: 24px; background: radial-gradient(ellipse at 50% 42%, #303427, #202123 65%); }
+.pv-loader-content { width: 100%; max-width: 320px; text-align: center; }
+.pv-loader-orbit { position: relative; width: clamp(180px, 55vw, 240px); aspect-ratio: 1; margin: 0 auto 28px; }
+.pv-loader-ring { position: absolute; inset: 0; border: 1px solid rgba(207,222,0,.22); border-radius: 50%; animation: pvOrbit 5s linear infinite; }
+.pv-loader-ring::after { content: ''; position: absolute; top: 50%; left: -4px; width: 7px; height: 7px; border-radius: 50%; background: var(--pv-primary); box-shadow: 0 0 18px rgba(207,222,0,.7); }
+.pv-loader-ring-inner { inset: 20px; border: 1px dashed rgba(255,255,255,.14); animation-direction: reverse; animation-duration: 8s; }
+.pv-loader-ring-inner::after { width: 4px; height: 4px; left: -2px; background: white; box-shadow: none; }
+.pv-loader-core { position: absolute; inset: 20%; display: grid; place-items: center; border-radius: 50%; border: 1px solid rgba(207,222,0,.12); background: rgba(34,36,38,.7); box-shadow: 0 0 45px rgba(207,222,0,.05); }
+.pv-loader-core img { width: 78%; max-width: 112px; }
+.pv-loader-track { width: 120px; height: 2px; margin: 24px auto 0; overflow: hidden; background: rgba(255,255,255,.1); border-radius: 2px; }
+.pv-loader-track span { display: block; width: 45%; height: 100%; background: var(--pv-primary); animation: pvLoading 1.5s ease-in-out infinite; }
+@keyframes pvLoading { from { transform: translateX(-110%); } to { transform: translateX(330%); } }
+/* Portada: red orbital e identidad de marca */
+.pv-hero { background: linear-gradient(130deg, #202123, #262729 60%, #222526); }
+.pv-hero-glow { position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 78% 45%, rgba(207,222,0,.075), transparent 55%); pointer-events: none; }
+.pv-hero-copy { animation: pvReveal .8s ease-out both; }
+.pv-orbit { position: relative; width: 100%; max-width: 560px; aspect-ratio: 1; margin-inline: auto; min-width: 0; }
+.pv-orbit-grid { position: absolute; inset: 4%; opacity: .35; background-image: radial-gradient(rgba(255,255,255,.3) .7px, transparent .7px); background-size: 22px 22px; mask-image: radial-gradient(circle, black 20%, transparent 70%); }
+.pv-orbit-halo { position: absolute; inset: 18%; border-radius: 50%; background: radial-gradient(circle, rgba(207,222,0,.1), transparent 68%); animation: pvBreathe 6s ease-in-out infinite; }
+.pv-orbit-network { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pv-orbit-ring { transform-origin: 260px 260px; animation: pvOrbit 45s linear infinite; }
+.pv-orbit-ring-reverse { animation-direction: reverse; animation-duration: 60s; }
+.pv-orbit-core { position: absolute; inset: 32%; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at 30% 20%, #36392b, #222426 75%); border: 1px solid rgba(207,222,0,.25); box-shadow: 0 0 70px rgba(207,222,0,.08), inset 0 0 28px rgba(207,222,0,.05); }
+.pv-orbit-label { position: absolute; display: flex; align-items: center; gap: 10px; padding: 13px 16px; background: rgba(34,36,38,.92); border: 1px solid rgba(255,255,255,.13); border-radius: 14px; box-shadow: 0 12px 30px rgba(0,0,0,.15); animation: pvFloat 7s ease-in-out infinite; }
+.pv-orbit-label span { display: block; font-size: 11px; color: #f4f4f4; font-weight: 500; }
+.pv-orbit-label small { display: block; margin-top: 4px; font-size: 9px; color: #a5a5a5; }
+.pv-orbit-label-ai { left: 4%; top: 18%; }
+.pv-orbit-label-growth { right: 0; top: 62%; animation-delay: -2s; }
+.pv-orbit-label-design { left: 8%; bottom: 17%; animation-delay: -4s; }
+.pv-orbit-caption { position: absolute; bottom: 4%; left: 0; right: 0; text-align: center; font-size: 9px; letter-spacing: .2em; color: rgba(255,255,255,.4); }
+@keyframes pvOrbit { to { transform: rotate(360deg); } }
+@keyframes pvFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes pvBreathe { 0%,100% { opacity: .5; transform: scale(.95); } 50% { opacity: 1; transform: scale(1.08); } }
+@keyframes pvReveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 639px) {
+  .pv-orbit { max-width: 420px; }
+  .pv-orbit-core { inset: 30%; }
+  .pv-orbit-core > span { font-size: 6px; letter-spacing: .08em; }
+  .pv-orbit-core img { width: 60%; max-width: 84px; margin-block: 10px; }
+  .pv-orbit-label { padding: 10px; gap: 7px; border-radius: 10px; }
+  .pv-orbit-label span { font-size: 9px; }
+  .pv-orbit-label small { font-size: 8px; }
+  .pv-orbit-label-ai { left: 0; top: 13%; }
+  .pv-orbit-label-design { left: 0; bottom: 10%; }
+  .heightSlideHome .heightSlideHome__item { height: 280px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Contacto: brief creativo, controles y órbita decorativa */
+.pv-contact { background: linear-gradient(135deg, #202123, #262729 65%); }
+.pv-contact-glow { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(ellipse at 5% 20%, rgba(207,222,0,.08), transparent 45%); }
+.pv-contact-card { min-width: 0; border: 1px solid rgba(255,255,255,.12); border-radius: 24px; background: linear-gradient(155deg, rgba(255,255,255,.055), rgba(255,255,255,.018)); box-shadow: 0 30px 80px rgba(0,0,0,.12); }
+.pv-contact-input { display: block; width: 100%; min-width: 0; border: 1px solid rgba(255,255,255,.14); border-radius: 12px; background: #222426; padding: 14px 15px; font-size: 14px; color: #f5f5f5; transition: border-color .2s, background .2s; color-scheme: dark; }
+.pv-contact-input::placeholder { color: rgba(255,255,255,.35); }
+.pv-contact-input:hover { border-color: rgba(255,255,255,.28); }
+.pv-contact-input:focus { border-color: var(--pv-primary); background: #252829; }
+.pv-contact-input[aria-invalid="true"] { border-color: #ffaba5; }
+.pv-idea-note { background: linear-gradient(120deg, rgba(207,222,0,.05), rgba(207,222,0,.01)); }
+.pv-idea-orbit { position: absolute; width: 200px; height: 200px; border: 1px solid rgba(207,222,0,.2); border-radius: 50%; right: -85px; top: 20px; transform: rotate(-30deg); }
+.pv-idea-orbit::before, .pv-idea-orbit::after { content: ''; position: absolute; inset: 15px; border-radius: 50%; border: 1px dashed rgba(207,222,0,.15); }
+.pv-idea-orbit::after { inset: 35px; border-style: solid; }
+.pv-idea-orbit span { display: block; position: absolute; inset: 0; border-radius: 50%; animation: pvOrbit 25s linear infinite; }
+.pv-idea-orbit span::after { content: ''; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--pv-primary); top: 30px; left: 25px; box-shadow: 0 0 18px rgba(207,222,0,.5); }
+@media (prefers-reduced-motion: reduce) { .pv-idea-orbit span { animation: none; } }

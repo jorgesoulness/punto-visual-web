@@ -3,13 +3,16 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import MotionProvider from "@/components/motion/MotionProvider";
+import SectionScroll from "@/components/navigation/SectionScroll";
+import Preloader from "@/components/Preloader";
 
 export const metadata: Metadata = {
   title: {
     default: "Punto Visual — Agencia de Marketing Digital",
     template: "%s | Punto Visual",
   },
-  description: "Diseño y desarrollo web para marcas y negocios que buscan crecer con presencia digital profesional.",
+  description: "Creatividad, growth marketing, desarrollo web e inteligencia artificial para impulsar marcas y negocios.",
   metadataBase: new URL("https://punto-visual.mx"),
   openGraph: {
     type: "website",
@@ -46,11 +49,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es-MX" className={montserrat.variable}>
+    <html lang="es-MX" data-scroll-behavior="smooth" className={montserrat.variable}>
       <body className="bg-background text-foreground antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Preloader />
+          <a href="#contenido" className="sr-only fixed left-4 top-4 z-[100] rounded bg-primary px-5 py-3 text-black focus:not-sr-only">Ir al contenido</a>
+          <Header />
+          <SectionScroll />
+          <main id="contenido" tabIndex={-1}>{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

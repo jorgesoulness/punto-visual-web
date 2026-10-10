@@ -45,7 +45,7 @@ export default function LogoScrollAnimation({ triggerRef }: { triggerRef: React.
 
   return () => ctx.revert()
 
- }, [])
+ }, [triggerRef])
 
  return (
    <div ref={container} className="w-full h-full flex items-center justify-center">

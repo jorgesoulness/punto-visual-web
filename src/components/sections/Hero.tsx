@@ -1,71 +1,41 @@
 "use client";
-import { useRef } from "react";
-import Button from "../ui/Button";
-import SlideUp from "../motion/SlideUp";
-import FadeIn from "../motion/FadeIn";
+import Link from "next/link";
+import { ArrowDown, ArrowUpRight, Sparkles } from "lucide-react";
 import HeroParticles from "../HeroParticles";
-import HeroLogoBuild from "../hero/HeroLogoBuild";
+import GrowthOrbit from "../hero/GrowthOrbit";
+import { heroContent } from "@/data/site";
 
 export default function Hero() {
-  const heroRef = useRef<HTMLElement>(null!);
-  const logoContainerRef = useRef<HTMLDivElement>(null!);
-
   return (
-    <section
-      ref={heroRef}
-      className="relative overflow-hidden"
-      style={{ height: "200vh" }} // Altura extendida para permitir scroll
-    >
+    <section aria-labelledby="hero-title" className="pv-hero relative isolate overflow-hidden">
       <HeroParticles />
-      
-      {/* Contenedor sticky que se mantiene fijo mientras haces scroll */}
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-        <div className="max-w-7xl mx-auto p-0 grid gap-12 md:grid-cols-2 items-center relative z-10 w-full px-6">
-          
-          {/* Columna izquierda - Texto (estático) */}
-          <div className="space-y-6">
-            <div className="px-6 py-12 space-y-14 max-w-7xl mx-auto">
-              <span className="inline-block text-sm tracking-widest text-primary">
-                AGENCIA CREATIVA
-              </span>
-              <SlideUp>
-                <h1 className="text-4xl md:text-6xl font-bold leading-tight uppercase">
-                  Diseño y desarrollo web que <span className="text-primary">convierte</span>
-                </h1>
-              </SlideUp>
-              <FadeIn delay={0.15}>
-                <p className="text-lg text-foreground/80 max-w-xl">
-                  Creamos marcas, sitios web y experiencias digitales pensadas para hacer crecer negocios reales.
-                </p>
-              </FadeIn>
-            </div>
-            <div className="flex gap-4 pt-2">
-              <Button href="/contacto">
-                Cotiza tu proyecto
-              </Button>
-              <Button href="/portafolio" variant="ghost">
-                Ver portafolio
-              </Button>
-            </div>
+      <div className="pv-hero-glow" aria-hidden="true" />
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-8 px-6 pb-12 pt-14 sm:pt-20 lg:grid-cols-[1.1fr_1fr] lg:gap-4 lg:py-20">
+        <div className="pv-hero-copy max-w-2xl">
+          <p className="mb-7 flex items-center gap-3 text-[10px] font-semibold tracking-[0.18em] text-primary sm:text-xs">
+            <span className="h-2 w-2 shrink-0 rounded-full bg-primary shadow-[0_0_16px_#cfde00]" aria-hidden="true" />
+            {heroContent.eyebrow}
+          </p>
+          <h1 id="hero-title" className="text-[clamp(3rem,6.5vw,6rem)] font-normal leading-[0.98] tracking-[-0.025em] text-white">
+            {heroContent.title}<br /><span className="text-primary">{heroContent.highlight}</span>
+          </h1>
+          <p className="mt-7 max-w-lg text-base leading-relaxed text-foreground/80 sm:text-lg">{heroContent.description}</p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Link href="/contacto" className="pv-cta group inline-flex items-center justify-center gap-4 rounded-full bg-primary px-6 py-4 text-sm font-semibold text-black transition hover:bg-[#e6f542]">
+              Hablemos de tu proyecto <ArrowUpRight size={18} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+            </Link>
+            <Link href="/portafolio" className="inline-flex items-center justify-center gap-3 rounded-full border border-white/20 px-6 py-4 text-sm text-white transition hover:border-primary hover:text-primary">
+              Explora nuestro trabajo <ArrowUpRight size={18} aria-hidden="true" />
+            </Link>
           </div>
-
-          {/* Columna derecha - El div que contiene la animación */}
-          <div className="hidden md:block relative">
-            <div 
-              ref={logoContainerRef}
-              className="h-[500px] w-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur flex items-center justify-center relative"
-            >
-              {/* Pasamos ambos refs: el del hero (para el scroll) y el del contenedor (para la posición) */}
-              <HeroLogoBuild 
-                heroRef={heroRef} 
-                containerRef={logoContainerRef}
-              />
-              <div className="absolute inset-0 opacity-20 pointer-events-none">
-                <div className="tech-grid"></div>
-              </div>
-            </div>
-          </div>
-          
+          <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-xs text-foreground/70" aria-label="Nuestras especialidades">
+            {heroContent.capabilities.map((item) => <li key={item} className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-primary/70" aria-hidden="true" />{item}</li>)}
+          </ul>
+        </div>
+        <GrowthOrbit />
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 lg:col-span-2">
+          <p className="flex items-center gap-2 text-xs text-foreground/60"><Sparkles size={15} className="text-primary" aria-hidden="true" /> Creatividad + tecnología + dirección</p>
+          <Link href="#servicios" className="flex items-center gap-2 text-xs text-white/80 transition hover:text-primary">Descubre lo que podemos crear <ArrowDown size={15} aria-hidden="true" /></Link>
         </div>
       </div>
     </section>

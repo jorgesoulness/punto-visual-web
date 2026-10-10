@@ -41,7 +41,7 @@ export default function HeroLogoBuild({ heroRef, containerRef }: HeroLogoBuildPr
           scrub: 0.5,
           pin: true,
           anticipatePin: 1,
-          markers: true,
+          markers: false,
         }
       });
 

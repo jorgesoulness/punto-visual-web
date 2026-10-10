@@ -1,30 +1,43 @@
 "use client";
-import { useEffect, useState } from "react";
+import useMotionPreference from "../motion/useMotionPreference";
+import { useEffect, useRef, useState } from "react";
+import type { Swiper as SwiperInstance } from "swiper";
+import { Pause, Play } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { A11y, Autoplay, Keyboard } from "swiper/modules";
 import "swiper/css";
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/data/projects";
 export default function HomeHeroSlider() {
-  const [mounted, setMounted] = useState(false);
+  const reducedMotion = useMotionPreference();
+  const slider = useRef<SwiperInstance | null>(null);
+  const [paused, setPaused] = useState(false);
   useEffect(() => {
-    setMounted(true);
-  }, []);
-  if (!mounted) return null;
+    if (paused || reducedMotion !== false) slider.current?.autoplay.stop();
+    else slider.current?.autoplay.start();
+  }, [paused, reducedMotion]);
   return (
-    <section className="relative w-full heightSlideHome overflow-hidden">
+    <section aria-label="Proyectos destacados" className="relative w-full heightSlideHome overflow-hidden">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 pb-6">
+        <h2 className="text-2xl text-white">Ideas que toman forma.</h2>
+        {reducedMotion === false && <button type="button" aria-label={paused ? "Reanudar carrusel" : "Pausar carrusel"} onClick={() => setPaused(!paused)} className="flex shrink-0 items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs text-white">{paused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}<span className="hidden sm:inline">{paused ? "Reanudar" : "Pausar"}</span></button>}
+      </div>
       <Swiper
-        modules={[Autoplay]}
-        slidesPerView={2.25}
+        onSwiper={(instance) => { slider.current = instance; if (paused || reducedMotion !== false) instance.autoplay.stop(); }}
+        onSliderFirstMove={() => setPaused(true)}
+        modules={[A11y, Autoplay, Keyboard]}
+        slidesPerView={1.15}
+        breakpoints={{ 640: { slidesPerView: 1.5 }, 1024: { slidesPerView: 2.25 } }}
+        keyboard={{ enabled: true }}
         spaceBetween={20}
         loop
-        loopAdditionalSlides={projects.length}
         watchSlidesProgress
-        speed={1800}
+        speed={reducedMotion ? 0 : 1000}
         autoplay={{
           delay: 3500,
-          disableOnInteraction: false,
+          disableOnInteraction: true,
+          pauseOnMouseEnter: true,
         }}
         grabCursor
         className="w-full"
@@ -32,6 +45,7 @@ export default function HomeHeroSlider() {
         {projects.map((project, index) => (
           <SwiperSlide key={project.slug}>
             <Link
+              onFocus={() => setPaused(true)}
               href={`/portafolio/${project.slug}`}
               className="group block"
             >
@@ -40,14 +54,9 @@ export default function HomeHeroSlider() {
                   src={project.image}
                   alt={project.title}
                   fill
-                  sizes="100vw"
+                  sizes="(min-width: 1024px) 45vw, (min-width: 640px) 67vw, 90vw"
                   priority={index === 0}
-                  className="
-                    object-cover
-                    transition-transform
-                    duration-[2000ms]
-                    ease-out
-                  "
+                  className="object-cover transition-transform duration-[2000ms] ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
               </div>
